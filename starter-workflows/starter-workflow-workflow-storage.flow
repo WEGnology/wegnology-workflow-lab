@@ -1,0 +1,189 @@
+{
+  "_exportDate": "2019-08-15T19:59:05.861Z",
+  "_type": "flow",
+  "applicationId": "5c40ecbac853d20008cd96ba",
+  "customNodeVersions": [
+  ],
+  "customNodes": [
+  ],
+  "description": "",
+  "enabled": true,
+  "flowClass": "cloud",
+  "globals": [
+  ],
+  "id": "5d24eddc022e19000b80a069",
+  "name": "Starter Workflow: Workflow Storage",
+  "nodes": [
+    {
+      "config": {
+        "message": "",
+        "property": ""
+      },
+      "id": "MVlmQpI-xL",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "id": "CwvDon2R3w",
+        "label": "Debug",
+        "name": "debug",
+        "x": 660,
+        "y": 500
+      },
+      "outputIds": [
+      ],
+      "type": "DebugNode"
+    },
+    {
+      "config": {
+        "bodyTemplate": "{ \"result\" : {{working.result}} }",
+        "bodyTemplateType": "string",
+        "headerInfo": [
+        ],
+        "replyIdPath": "",
+        "responseCodeTemplate": ""
+      },
+      "id": "dvQbcP-Alh",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "id": "tvktYfBZRp",
+        "label": "Webhook Reply",
+        "name": "webhook-reply",
+        "x": 660,
+        "y": 400
+      },
+      "outputIds": [
+        [
+          "MVlmQpI-xL"
+        ]
+      ],
+      "type": "WebhookReplyNode"
+    },
+    {
+      "config": {
+        "cases": [
+          {
+            "caseLabel": "",
+            "caseTemplate": "count-workflow-runs",
+            "dontBreak": false
+          },
+          {
+            "caseLabel": "",
+            "caseTemplate": "count-two-workflow-runs",
+            "dontBreak": false
+          }
+        ],
+        "switchTemplate": "{{ data.query.id }}"
+      },
+      "id": "kbhd8cElzg",
+      "meta": {
+        "category": "logic",
+        "description": "",
+        "id": "gZuPKpPt0k",
+        "label": "Switch",
+        "name": "switch",
+        "x": 780,
+        "y": 200
+      },
+      "outputIds": [
+        [
+          "-3i5ZCAtjP"
+        ],
+        [
+          "dvQbcP-Alh"
+        ],
+        [
+          "IIvHcjCxla"
+        ]
+      ],
+      "type": "SwitchNode"
+    },
+    {
+      "config": {
+        "message": "",
+        "property": ""
+      },
+      "id": "-3i5ZCAtjP",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "id": "CwvDon2R3w",
+        "label": "Debug",
+        "name": "debug",
+        "x": 1040,
+        "y": 400
+      },
+      "outputIds": [
+      ],
+      "type": "DebugNode"
+    },
+    {
+      "config": {
+        "message": "",
+        "property": ""
+      },
+      "id": "VaDQvBO84q",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "id": "CwvDon2R3w",
+        "label": "Debug",
+        "name": "debug",
+        "x": 860,
+        "y": 560
+      },
+      "outputIds": [
+      ],
+      "type": "DebugNode"
+    },
+    {
+      "config": {
+        "bodyTemplate": "{ \"result\" : {{working.result}} }",
+        "bodyTemplateType": "string",
+        "headerInfo": [
+        ],
+        "replyIdPath": "",
+        "responseCodeTemplate": ""
+      },
+      "id": "IIvHcjCxla",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "id": "tvktYfBZRp",
+        "label": "Webhook Reply",
+        "name": "webhook-reply",
+        "x": 860,
+        "y": 460
+      },
+      "outputIds": [
+        [
+          "VaDQvBO84q"
+        ]
+      ],
+      "type": "WebhookReplyNode"
+    }
+  ],
+  "triggers": [
+    {
+      "config": {
+      },
+      "key": "5cddb5644c33040007a68ea6",
+      "meta": {
+        "category": "trigger",
+        "description": "",
+        "id": "V~j7MvcjUN",
+        "label": "Workflow Storage",
+        "name": "webhook",
+        "uiId": "XfDuTsrl4u",
+        "x": 780,
+        "y": 80
+      },
+      "outputIds": [
+        [
+          "kbhd8cElzg"
+        ]
+      ],
+      "type": "webhook"
+    }
+  ]
+}

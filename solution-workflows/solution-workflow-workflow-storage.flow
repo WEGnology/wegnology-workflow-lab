@@ -1,0 +1,501 @@
+{
+  "_exportDate": "2019-09-25T18:29:02.320Z",
+  "_type": "flow",
+  "applicationId": "5c40ecbac853d20008cd96ba",
+  "customNodeVersions": [
+  ],
+  "customNodes": [
+  ],
+  "description": "",
+  "enabled": true,
+  "flowClass": "cloud",
+  "globals": [
+  ],
+  "id": "5d28c29b16770d0008c01387",
+  "name": "Solution Workflow: Workflow Storage",
+  "nodes": [
+    {
+      "config": {
+        "cases": [
+          {
+            "caseLabel": "",
+            "caseTemplate": "count-workflow-runs",
+            "dontBreak": false
+          },
+          {
+            "caseLabel": "",
+            "caseTemplate": "count-two-workflow-runs",
+            "dontBreak": false
+          }
+        ],
+        "switchTemplate": "{{ data.query.id }}"
+      },
+      "id": "WTSy8leClo",
+      "meta": {
+        "category": "logic",
+        "description": "",
+        "id": "gZuPKpPt0k",
+        "label": "Switch",
+        "name": "switch",
+        "x": 400,
+        "y": 280
+      },
+      "outputIds": [
+        [
+        ],
+        [
+          "fxFBWwtkHN"
+        ],
+        [
+          "lPwFRKsOcG"
+        ]
+      ],
+      "type": "SwitchNode"
+    },
+    {
+      "config": {
+        "bodyTemplate": "{ \"result\" : {{working.result}} }",
+        "bodyTemplateType": "string",
+        "cookieInfo": [
+        ],
+        "experienceVersion": "develop",
+        "headerInfo": [
+          {
+            "keyTemplate": "Content-Type",
+            "valueTemplate": "application/json"
+          }
+        ],
+        "replyIdPath": "",
+        "replyType": "custom",
+        "responseCodeTemplate": ""
+      },
+      "id": "54BN4Sl4KB",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "id": "QOeWFycrcN",
+        "label": "Endpoint Reply",
+        "name": "endpoint-reply",
+        "x": 300,
+        "y": 700
+      },
+      "outputIds": [
+        [
+          "Tdt9Ssq2KW"
+        ]
+      ],
+      "type": "EndpointReplyNode"
+    },
+    {
+      "config": {
+        "message": "",
+        "property": ""
+      },
+      "id": "FcAJtGdTzH",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "id": "CwvDon2R3w",
+        "label": "Debug",
+        "name": "debug",
+        "x": 300,
+        "y": 900
+      },
+      "outputIds": [
+      ],
+      "type": "DebugNode"
+    },
+    {
+      "config": {
+        "expression": "{{data.body.count}}"
+      },
+      "id": "fxFBWwtkHN",
+      "meta": {
+        "category": "logic",
+        "description": "",
+        "id": "np91rWm8w4",
+        "label": "Conditional",
+        "name": "conditional",
+        "x": 140,
+        "y": 500
+      },
+      "outputIds": [
+        [
+          "ajMD61fjtR"
+        ],
+        [
+          "I7rXnrf6ST"
+        ]
+      ],
+      "type": "ConditionalNode"
+    },
+    {
+      "config": {
+        "bodyTemplate": "{ \"result\" : {} }",
+        "bodyTemplateType": "string",
+        "cookieInfo": [
+        ],
+        "experienceVersion": "develop",
+        "headerInfo": [
+          {
+            "keyTemplate": "Content-Type",
+            "valueTemplate": "application/json"
+          }
+        ],
+        "replyIdPath": "",
+        "replyType": "custom",
+        "responseCodeTemplate": ""
+      },
+      "id": "OgnFjErWfz",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "id": "QOeWFycrcN",
+        "label": "Endpoint Reply",
+        "name": "endpoint-reply",
+        "x": 100,
+        "y": 700
+      },
+      "outputIds": [
+        [
+          "qgP-UEmdGr"
+        ]
+      ],
+      "type": "EndpointReplyNode"
+    },
+    {
+      "config": {
+        "message": "",
+        "property": ""
+      },
+      "id": "qgP-UEmdGr",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "id": "CwvDon2R3w",
+        "label": "Debug",
+        "name": "debug",
+        "x": 100,
+        "y": 800
+      },
+      "outputIds": [
+      ],
+      "type": "DebugNode"
+    },
+    {
+      "config": {
+        "keyName": "count",
+        "resultPath": "",
+        "value": "1",
+        "valueType": "incr"
+      },
+      "id": "ajMD61fjtR",
+      "meta": {
+        "category": "data",
+        "description": "",
+        "id": "CpH54UaAcP",
+        "label": "Storage: Set Value",
+        "name": "store-value",
+        "x": 100,
+        "y": 600
+      },
+      "outputIds": [
+        [
+          "OgnFjErWfz"
+        ]
+      ],
+      "type": "StoreValueNode"
+    },
+    {
+      "config": {
+        "defaultValue": "0",
+        "defaultValueType": "json",
+        "keyName": "count",
+        "valuePath": "working.result"
+      },
+      "id": "I7rXnrf6ST",
+      "meta": {
+        "category": "data",
+        "description": "",
+        "id": "QzagTTZfMk",
+        "label": "Storage: Get Value",
+        "name": "get-value",
+        "x": 300,
+        "y": 600
+      },
+      "outputIds": [
+        [
+          "54BN4Sl4KB"
+        ]
+      ],
+      "type": "GetValueNode"
+    },
+    {
+      "config": {
+        "keyName": "count",
+        "resultPath": "",
+        "value": "1",
+        "valueType": "clear"
+      },
+      "id": "Tdt9Ssq2KW",
+      "meta": {
+        "category": "data",
+        "description": "",
+        "id": "CpH54UaAcP",
+        "label": "Storage: Set Value",
+        "name": "store-value",
+        "x": 300,
+        "y": 800
+      },
+      "outputIds": [
+        [
+          "FcAJtGdTzH"
+        ]
+      ],
+      "type": "StoreValueNode"
+    },
+    {
+      "config": {
+        "bodyTemplate": "{ \"result\" : {{working.result}} }",
+        "bodyTemplateType": "string",
+        "cookieInfo": [
+        ],
+        "experienceVersion": "develop",
+        "headerInfo": [
+          {
+            "keyTemplate": "Content-Type",
+            "valueTemplate": "application/json"
+          }
+        ],
+        "replyIdPath": "",
+        "replyType": "custom",
+        "responseCodeTemplate": ""
+      },
+      "id": "brDv2NBeWi",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "id": "QOeWFycrcN",
+        "label": "Endpoint Reply",
+        "name": "endpoint-reply",
+        "x": 740,
+        "y": 720
+      },
+      "outputIds": [
+        [
+          "NKvqXvELlb"
+        ]
+      ],
+      "type": "EndpointReplyNode"
+    },
+    {
+      "config": {
+        "message": "",
+        "property": ""
+      },
+      "id": "vYvAxfHL-Y",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "id": "CwvDon2R3w",
+        "label": "Debug",
+        "name": "debug",
+        "x": 740,
+        "y": 900
+      },
+      "outputIds": [
+      ],
+      "type": "DebugNode"
+    },
+    {
+      "config": {
+        "expression": "{{data.body.count}}"
+      },
+      "id": "lPwFRKsOcG",
+      "meta": {
+        "category": "logic",
+        "description": "",
+        "id": "np91rWm8w4",
+        "label": "Conditional",
+        "name": "conditional",
+        "x": 620,
+        "y": 440
+      },
+      "outputIds": [
+        [
+          "DLoKd4vx69"
+        ],
+        [
+          "FsS6dzBgSg"
+        ]
+      ],
+      "type": "ConditionalNode"
+    },
+    {
+      "config": {
+        "bodyTemplate": "{ \"result\" : {} }",
+        "bodyTemplateType": "string",
+        "cookieInfo": [
+        ],
+        "experienceVersion": "develop",
+        "headerInfo": [
+          {
+            "keyTemplate": "Content-Type",
+            "valueTemplate": "application/json"
+          }
+        ],
+        "replyIdPath": "",
+        "replyType": "custom",
+        "responseCodeTemplate": ""
+      },
+      "id": "5C5X0GTblG",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "id": "QOeWFycrcN",
+        "label": "Endpoint Reply",
+        "name": "endpoint-reply",
+        "x": 520,
+        "y": 640
+      },
+      "outputIds": [
+        [
+          "evzEgU5BVD"
+        ]
+      ],
+      "type": "EndpointReplyNode"
+    },
+    {
+      "config": {
+        "message": "",
+        "property": ""
+      },
+      "id": "evzEgU5BVD",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "id": "CwvDon2R3w",
+        "label": "Debug",
+        "name": "debug",
+        "x": 520,
+        "y": 740
+      },
+      "outputIds": [
+      ],
+      "type": "DebugNode"
+    },
+    {
+      "config": {
+        "keyName": "count-{{data.body.id}}",
+        "resultPath": "",
+        "value": "1",
+        "valueType": "incr"
+      },
+      "id": "DLoKd4vx69",
+      "meta": {
+        "category": "data",
+        "description": "",
+        "id": "CpH54UaAcP",
+        "label": "Storage: Set Value",
+        "name": "store-value",
+        "x": 520,
+        "y": 540
+      },
+      "outputIds": [
+        [
+          "5C5X0GTblG"
+        ]
+      ],
+      "type": "StoreValueNode"
+    },
+    {
+      "config": {
+        "defaultValue": "0",
+        "defaultValueType": "json",
+        "keyName": "count-{{data.body.id}}",
+        "valuePath": "working.result"
+      },
+      "id": "FsS6dzBgSg",
+      "meta": {
+        "category": "data",
+        "description": "",
+        "id": "QzagTTZfMk",
+        "label": "Storage: Get Value",
+        "name": "get-value",
+        "x": 740,
+        "y": 620
+      },
+      "outputIds": [
+        [
+          "brDv2NBeWi"
+        ]
+      ],
+      "type": "GetValueNode"
+    },
+    {
+      "config": {
+        "keyName": "count-{{data.body.id}}",
+        "resultPath": "",
+        "value": "1",
+        "valueType": "clear"
+      },
+      "id": "NKvqXvELlb",
+      "meta": {
+        "category": "data",
+        "description": "",
+        "id": "CpH54UaAcP",
+        "label": "Storage: Set Value",
+        "name": "store-value",
+        "x": 740,
+        "y": 800
+      },
+      "outputIds": [
+        [
+          "vYvAxfHL-Y"
+        ]
+      ],
+      "type": "StoreValueNode"
+    },
+    {
+      "config": {
+      },
+      "id": "Wd2QV3N8lh",
+      "meta": {
+        "annotationText": "The Switch Node determines which test to run depending on the value of {{data.body.id}}",
+        "category": "annotation",
+        "height": 100,
+        "label": "Note",
+        "name": "note",
+        "width": 260,
+        "x": 500,
+        "y": 160
+      },
+      "outputIds": [
+      ],
+      "type": "AnnotationNode"
+    }
+  ],
+  "triggers": [
+    {
+      "config": {
+      },
+      "key": "5d2f35cbf82c4f00073cea6e",
+      "meta": {
+        "category": "trigger",
+        "description": "",
+        "id": "V~j7MvcjUN",
+        "label": "Workflow Storage",
+        "name": "webhook",
+        "uiId": "ZM694r3oOr",
+        "x": 260,
+        "y": 140
+      },
+      "outputIds": [
+        [
+          "WTSy8leClo"
+        ]
+      ],
+      "type": "webhook"
+    }
+  ]
+}

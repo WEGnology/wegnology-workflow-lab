@@ -1,0 +1,717 @@
+{
+  "_exportDate": "2019-09-25T18:28:13.230Z",
+  "_type": "flow",
+  "applicationId": "5c40ecbac853d20008cd96ba",
+  "customNodeVersions": [
+  ],
+  "customNodes": [
+  ],
+  "description": "",
+  "enabled": true,
+  "flowClass": "cloud",
+  "globals": [
+  ],
+  "id": "5d27845e16770d0008c0132d",
+  "name": "Solution Workflow: Encoding/Decoding",
+  "nodes": [
+    {
+      "config": {
+        "cases": [
+          {
+            "caseLabel": "",
+            "caseTemplate": "decode-json",
+            "dontBreak": false
+          },
+          {
+            "caseLabel": "",
+            "caseTemplate": "decode-base64",
+            "dontBreak": false
+          },
+          {
+            "caseLabel": "",
+            "caseTemplate": "encode-base64",
+            "dontBreak": false
+          },
+          {
+            "caseLabel": "",
+            "caseTemplate": "decode-hex",
+            "dontBreak": false
+          },
+          {
+            "caseLabel": "",
+            "caseTemplate": "decode-xml",
+            "dontBreak": false
+          },
+          {
+            "caseLabel": "",
+            "caseTemplate": "encode-jwt",
+            "dontBreak": false
+          }
+        ],
+        "switchTemplate": "{{ data.query.id }}"
+      },
+      "id": "uKUBDqQ5hU",
+      "meta": {
+        "category": "logic",
+        "description": "",
+        "id": "gZuPKpPt0k",
+        "label": "Switch",
+        "name": "switch",
+        "x": 680,
+        "y": 300
+      },
+      "outputIds": [
+        [
+        ],
+        [
+          "AJEavz3jPf"
+        ],
+        [
+          "cW0P-YtFbd"
+        ],
+        [
+          "cRBeMVkm7D"
+        ],
+        [
+          "q7uVM1Ucqv"
+        ],
+        [
+          "tnYXc5-Sxw"
+        ],
+        [
+          "1sf1V5nqrT"
+        ]
+      ],
+      "type": "SwitchNode"
+    },
+    {
+      "config": {
+        "message": "",
+        "property": ""
+      },
+      "id": "WfNm4e8251",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "id": "CwvDon2R3w",
+        "label": "Debug",
+        "name": "debug",
+        "x": 940,
+        "y": 1200
+      },
+      "outputIds": [
+      ],
+      "type": "DebugNode"
+    },
+    {
+      "config": {
+        "message": "",
+        "property": ""
+      },
+      "id": "mHX3g5Iqa7",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "id": "CwvDon2R3w",
+        "label": "Debug",
+        "name": "debug",
+        "x": 680,
+        "y": 1040
+      },
+      "outputIds": [
+      ],
+      "type": "DebugNode"
+    },
+    {
+      "config": {
+        "message": "",
+        "property": ""
+      },
+      "id": "I-KZF56evx",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "id": "CwvDon2R3w",
+        "label": "Debug",
+        "name": "debug",
+        "x": 560,
+        "y": 600
+      },
+      "outputIds": [
+      ],
+      "type": "DebugNode"
+    },
+    {
+      "config": {
+        "message": "",
+        "property": ""
+      },
+      "id": "JAK_yd7C8b",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "id": "CwvDon2R3w",
+        "label": "Debug",
+        "name": "debug",
+        "x": 400,
+        "y": 860
+      },
+      "outputIds": [
+      ],
+      "type": "DebugNode"
+    },
+    {
+      "config": {
+        "message": "",
+        "property": ""
+      },
+      "id": "-NpsiF0l70",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "id": "CwvDon2R3w",
+        "label": "Debug",
+        "name": "debug",
+        "x": 280,
+        "y": 680
+      },
+      "outputIds": [
+      ],
+      "type": "DebugNode"
+    },
+    {
+      "config": {
+        "bodyTemplate": "{ \"result\" : {{ working.result}} }",
+        "bodyTemplateType": "string",
+        "headerInfo": [
+        ],
+        "replyIdPath": "",
+        "responseCodeTemplate": ""
+      },
+      "id": "QSBNCFGo8l",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "id": "tvktYfBZRp",
+        "label": "Webhook Reply",
+        "name": "webhook-reply",
+        "x": 280,
+        "y": 600
+      },
+      "outputIds": [
+        [
+          "-NpsiF0l70"
+        ]
+      ],
+      "type": "WebhookReplyNode"
+    },
+    {
+      "config": {
+        "bodyTemplate": "{ \"result\" : \"{{decodeBase64 data.body.value}}\" }",
+        "bodyTemplateType": "string",
+        "headerInfo": [
+        ],
+        "replyIdPath": "",
+        "responseCodeTemplate": ""
+      },
+      "id": "cW0P-YtFbd",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "id": "_0oFMM-7MU",
+        "label": "Webhook Reply",
+        "name": "webhook-reply",
+        "x": 400,
+        "y": 780
+      },
+      "outputIds": [
+        [
+          "JAK_yd7C8b"
+        ]
+      ],
+      "type": "WebhookReplyNode"
+    },
+    {
+      "config": {
+        "bodyTemplate": "{ \"result\" : \"{{{encodeBase64 data.body.value}}}\" }",
+        "bodyTemplateType": "string",
+        "headerInfo": [
+        ],
+        "replyIdPath": "",
+        "responseCodeTemplate": ""
+      },
+      "id": "cRBeMVkm7D",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "id": "zkUxVxIW8e",
+        "label": "Webhook Reply",
+        "name": "webhook-reply",
+        "x": 560,
+        "y": 520
+      },
+      "outputIds": [
+        [
+          "I-KZF56evx"
+        ]
+      ],
+      "type": "WebhookReplyNode"
+    },
+    {
+      "config": {
+        "bodyTemplate": "{ \"result\": {{jsonEncode working}} }",
+        "bodyTemplateType": "string",
+        "headerInfo": [
+        ],
+        "replyIdPath": "",
+        "responseCodeTemplate": ""
+      },
+      "id": "b-Jqg4J0jP",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "id": "gz7Ipy3clw",
+        "label": "Webhook Reply",
+        "name": "webhook-reply",
+        "x": 680,
+        "y": 960
+      },
+      "outputIds": [
+        [
+          "mHX3g5Iqa7"
+        ]
+      ],
+      "type": "WebhookReplyNode"
+    },
+    {
+      "config": {
+        "destination": "working",
+        "source": "data.body.raw"
+      },
+      "id": "AJEavz3jPf",
+      "meta": {
+        "category": "logic",
+        "description": "",
+        "id": "3SJFvLdyUG",
+        "label": "JSON: Decode",
+        "name": "json-decode",
+        "x": 280,
+        "y": 440
+      },
+      "outputIds": [
+        [
+          "K6LA4JQiqD"
+        ]
+      ],
+      "type": "JsonDecodeNode"
+    },
+    {
+      "config": {
+        "statements": [
+          {
+            "expression": "{{working.num1}} + {{working.num2}}",
+            "resultPath": "working.result"
+          }
+        ]
+      },
+      "id": "K6LA4JQiqD",
+      "meta": {
+        "category": "logic",
+        "description": "",
+        "id": "HT-YvYzLCM",
+        "label": "Math",
+        "name": "math",
+        "x": 280,
+        "y": 520
+      },
+      "outputIds": [
+        [
+          "QSBNCFGo8l"
+        ]
+      ],
+      "type": "MathNode"
+    },
+    {
+      "config": {
+        "script": "/*\n * payload variable contains current payload.\n * e.g. payload.data.myValue\n *\n * You can modify the current payload variable\n * or return an object that will entirely\n * replace the payload.\n *\n * console.log() will write a message to\n * the Debug tab.\n *\n * The Buffer object is available for\n * complex parsing: https://nodejs.org/dist/latest-v6.x/docs/api/buffer.html\n*/\nconst buf = Buffer.from(payload.data.body.raw, \"hex\")\n\npayload.working = {\n  temperature: buf.readUInt32LE(0, 4),\n  voltage: buf.readUInt32LE(4, 4)\n}"
+      },
+      "id": "q7uVM1Ucqv",
+      "meta": {
+        "category": "logic",
+        "description": "",
+        "id": "s-ElcTpHVo",
+        "label": "Function",
+        "name": "function",
+        "x": 680,
+        "y": 880
+      },
+      "outputIds": [
+        [
+          "b-Jqg4J0jP"
+        ]
+      ],
+      "type": "RawFunctionNode"
+    },
+    {
+      "config": {
+        "algorithmTemplate": "HS256",
+        "dataTemplate": "data.body.data",
+        "dataTemplateType": "path",
+        "destinationPath": "working.token",
+        "expiresIn": 86400,
+        "issuerTemplate": "",
+        "secretTemplate": "{{data.body.secret}}"
+      },
+      "id": "1sf1V5nqrT",
+      "meta": {
+        "category": "logic",
+        "description": "",
+        "id": "1sf1V5nqrT",
+        "isExpRequired": true,
+        "label": "JWT: Create",
+        "name": "jwt-create",
+        "timeUnit": "Days",
+        "x": 1220,
+        "y": 520
+      },
+      "outputIds": [
+        [
+          "pCAci1nTca"
+        ]
+      ],
+      "type": "JWTCreateNode"
+    },
+    {
+      "config": {
+        "message": "",
+        "property": ""
+      },
+      "id": "xH_T_lW6rn",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "id": "CwvDon2R3w",
+        "label": "Debug",
+        "name": "debug",
+        "x": 1220,
+        "y": 720
+      },
+      "outputIds": [
+      ],
+      "type": "DebugNode"
+    },
+    {
+      "config": {
+        "bodyTemplate": "{ \"token\" : \"{{working.token}}\" }",
+        "bodyTemplateType": "string",
+        "headerInfo": [
+        ],
+        "replyIdPath": "",
+        "responseCodeTemplate": ""
+      },
+      "id": "pCAci1nTca",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "id": "E8vPqVuZkK",
+        "label": "Webhook Reply",
+        "name": "webhook-reply",
+        "x": 1220,
+        "y": 640
+      },
+      "outputIds": [
+        [
+          "xH_T_lW6rn"
+        ]
+      ],
+      "type": "WebhookReplyNode"
+    },
+    {
+      "config": {
+        "bodyTemplate": "working.body",
+        "bodyTemplateType": "path",
+        "headerInfo": [
+        ],
+        "replyIdPath": "",
+        "responseCodeTemplate": "200"
+      },
+      "id": "d450n-3slJ",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "id": "E8vPqVuZkK",
+        "label": "Webhook Reply",
+        "name": "webhook-reply",
+        "x": 940,
+        "y": 1100
+      },
+      "outputIds": [
+        [
+          "WfNm4e8251"
+        ]
+      ],
+      "type": "WebhookReplyNode"
+    },
+    {
+      "config": {
+      },
+      "id": "WDjpuxJczA",
+      "meta": {
+        "annotationText": "The Switch Node determines which test to run depending on the value of {{data.body.id}}",
+        "category": "annotation",
+        "height": 100,
+        "label": "Note",
+        "name": "note",
+        "width": 260,
+        "x": 360,
+        "y": 220
+      },
+      "outputIds": [
+      ],
+      "type": "AnnotationNode"
+    },
+    {
+      "config": {
+      },
+      "id": "S6k86QikdZ",
+      "meta": {
+        "annotationText": "Note the inline helpers for encoding and decoding base64 in the reply body.",
+        "category": "annotation",
+        "height": 100,
+        "label": "Note",
+        "name": "note",
+        "width": 260,
+        "x": 300,
+        "y": 940
+      },
+      "outputIds": [
+      ],
+      "type": "AnnotationNode"
+    },
+    {
+      "config": {
+      },
+      "id": "wD_XRAxqLZ",
+      "meta": {
+        "annotationText": "The test makes use of the Buffer object in the Function Node.",
+        "category": "annotation",
+        "height": 100,
+        "label": "Note",
+        "name": "note",
+        "width": 260,
+        "x": 640,
+        "y": 1120
+      },
+      "outputIds": [
+      ],
+      "type": "AnnotationNode"
+    },
+    {
+      "config": {
+        "documentPath": "data.body",
+        "resultFormatTemplate": "text",
+        "resultPath": "working.temperatureValue",
+        "selectorTemplate": "Temperature > Value"
+      },
+      "id": "tnYXc5-Sxw",
+      "meta": {
+        "category": "logic",
+        "description": "",
+        "id": "CFNZoGY0NC",
+        "label": "HTML/XML Parser",
+        "name": "html-parser",
+        "x": 940,
+        "y": 480
+      },
+      "outputIds": [
+        [
+          "yaSC9KC6UB"
+        ]
+      ],
+      "type": "HtmlParserNode"
+    },
+    {
+      "config": {
+        "documentPath": "data.body",
+        "resultFormatTemplate": "text",
+        "resultPath": "working.temperatureThreshold",
+        "selectorTemplate": "Temperature > Threshold"
+      },
+      "id": "yaSC9KC6UB",
+      "meta": {
+        "category": "logic",
+        "description": "",
+        "id": "CFNZoGY0NC",
+        "label": "HTML/XML Parser",
+        "name": "html-parser",
+        "x": 940,
+        "y": 560
+      },
+      "outputIds": [
+        [
+          "CIQN5YtXkp"
+        ]
+      ],
+      "type": "HtmlParserNode"
+    },
+    {
+      "config": {
+        "documentPath": "data.body",
+        "resultFormatTemplate": "text",
+        "resultPath": "working.voltageValue",
+        "selectorTemplate": "Voltage > Value"
+      },
+      "id": "CIQN5YtXkp",
+      "meta": {
+        "category": "logic",
+        "description": "",
+        "id": "CFNZoGY0NC",
+        "label": "HTML/XML Parser",
+        "name": "html-parser",
+        "x": 940,
+        "y": 640
+      },
+      "outputIds": [
+        [
+          "DaZNOQJ0qq"
+        ]
+      ],
+      "type": "HtmlParserNode"
+    },
+    {
+      "config": {
+        "documentPath": "data.body",
+        "resultFormatTemplate": "text",
+        "resultPath": "working.voltageThreshold",
+        "selectorTemplate": "Voltage > Threshold"
+      },
+      "id": "DaZNOQJ0qq",
+      "meta": {
+        "category": "logic",
+        "description": "",
+        "id": "CFNZoGY0NC",
+        "label": "HTML/XML Parser",
+        "name": "html-parser",
+        "x": 940,
+        "y": 720
+      },
+      "outputIds": [
+        [
+          "j9Z3zt1hVN"
+        ]
+      ],
+      "type": "HtmlParserNode"
+    },
+    {
+      "config": {
+        "documentPath": "data.body",
+        "resultFormatTemplate": "text",
+        "resultPath": "working.currentValue",
+        "selectorTemplate": "Current > Value"
+      },
+      "id": "j9Z3zt1hVN",
+      "meta": {
+        "category": "logic",
+        "description": "",
+        "id": "CFNZoGY0NC",
+        "label": "HTML/XML Parser",
+        "name": "html-parser",
+        "x": 940,
+        "y": 800
+      },
+      "outputIds": [
+        [
+          "I01qieWtcR"
+        ]
+      ],
+      "type": "HtmlParserNode"
+    },
+    {
+      "config": {
+        "documentPath": "data.body",
+        "resultFormatTemplate": "text",
+        "resultPath": "working.currentThreshold",
+        "selectorTemplate": "Current > Threshold"
+      },
+      "id": "I01qieWtcR",
+      "meta": {
+        "category": "logic",
+        "description": "",
+        "id": "CFNZoGY0NC",
+        "label": "HTML/XML Parser",
+        "name": "html-parser",
+        "x": 940,
+        "y": 880
+      },
+      "outputIds": [
+        [
+          "puieInZlX9"
+        ]
+      ],
+      "type": "HtmlParserNode"
+    },
+    {
+      "config": {
+        "rules": [
+          {
+            "destination": "working.body.result.temperature",
+            "type": "set",
+            "valueTemplate": "{{#gt (add working.temperatureValue.[0] 0) (add working.temperatureThreshold.[0] 0)}}true{{else}}false{{/gt}}",
+            "valueTemplateType": "json"
+          },
+          {
+            "destination": "working.body.result.voltage",
+            "type": "set",
+            "valueTemplate": "{{#gt (add working.voltageValue.[0] 0) (add working.voltageThreshold.[0] 0)}}true{{else}}false{{/gt}}",
+            "valueTemplateType": "json"
+          },
+          {
+            "destination": "working.body.result.current",
+            "type": "set",
+            "valueTemplate": "{{#gt (add working.currentValue.[0] 0) (add working.currentThreshold.[0] 0)}}true{{else}}false{{/gt}}",
+            "valueTemplateType": "json"
+          }
+        ]
+      },
+      "id": "puieInZlX9",
+      "meta": {
+        "category": "logic",
+        "description": "",
+        "id": "gDHzkpxrms",
+        "label": "Mutate",
+        "name": "mutate",
+        "x": 940,
+        "y": 980
+      },
+      "outputIds": [
+        [
+          "d450n-3slJ"
+        ]
+      ],
+      "type": "MutateNode"
+    }
+  ],
+  "triggers": [
+    {
+      "config": {
+      },
+      "key": "5d278522bb63290008c0f5e3",
+      "meta": {
+        "category": "trigger",
+        "description": "",
+        "id": "V~j7MvcjUN",
+        "label": "Encoding/Decoding",
+        "name": "webhook",
+        "uiId": "QQMjnipUzI",
+        "x": 680,
+        "y": 140
+      },
+      "outputIds": [
+        [
+          "uKUBDqQ5hU"
+        ]
+      ],
+      "type": "webhook"
+    }
+  ]
+}

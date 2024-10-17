@@ -1,0 +1,647 @@
+{
+  "_exportDate": "2024-08-07T19:01:16.789Z",
+  "_type": "flow",
+  "applicationId": "62dff07266544772066745a9",
+  "customNodeVersions": [
+  ],
+  "customNodes": [
+  ],
+  "enabled": true,
+  "flowClass": "cloud",
+  "globals": [
+  ],
+  "id": "66b3b9b6fa97c208780651e6",
+  "name": "Solution Workflow: Array",
+  "nodes": [
+    {
+      "config": {
+        "cases": [
+          {
+            "caseLabel": "",
+            "caseTemplate": "add-random-number-array"
+          },
+          {
+            "caseLabel": "",
+            "caseTemplate": "array-index"
+          },
+          {
+            "caseLabel": "",
+            "caseTemplate": "add-to-element"
+          },
+          {
+            "caseLabel": "",
+            "caseTemplate": "array-flatten"
+          },
+          {
+            "caseLabel": "",
+            "caseTemplate": "array-groupBy"
+          }
+        ],
+        "switchTemplate": "{{ data.query.id }}"
+      },
+      "id": "o6xwEimMA-",
+      "meta": {
+        "category": "logic",
+        "description": "",
+        "label": "Switch",
+        "name": "switch",
+        "x": 980,
+        "y": 220
+      },
+      "outputIds": [
+        [
+        ],
+        [
+          "Nekj79sJH5"
+        ],
+        [
+          "UXp4vJp6fe"
+        ],
+        [
+          "OCWOnIK7-f"
+        ],
+        [
+          "43LqKZwPWo"
+        ],
+        [
+          "XgZIDeOwSG"
+        ]
+      ],
+      "type": "SwitchNode"
+    },
+    {
+      "config": {
+        "level": "verbose",
+        "message": "",
+        "property": ""
+      },
+      "id": "TAVv_CW7NN",
+      "meta": {
+        "category": "debug",
+        "description": "",
+        "label": "Debug",
+        "name": "debug",
+        "x": 800,
+        "y": 640
+      },
+      "outputIds": [
+      ],
+      "type": "DebugNode"
+    },
+    {
+      "config": {
+        "level": "verbose",
+        "message": "",
+        "property": ""
+      },
+      "id": "anqcphoFB_",
+      "meta": {
+        "category": "debug",
+        "description": "",
+        "label": "Debug",
+        "name": "debug",
+        "x": 600,
+        "y": 800
+      },
+      "outputIds": [
+      ],
+      "type": "DebugNode"
+    },
+    {
+      "config": {
+        "bodyTemplate": "{ \"result\" : {{working.result}} }",
+        "bodyTemplateType": "string",
+        "headerInfo": [
+        ],
+        "replyIdPath": "",
+        "responseCodeTemplate": ""
+      },
+      "id": "foPIPkVnYe",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "label": "Webhook Reply",
+        "name": "webhook-reply",
+        "x": 800,
+        "y": 560
+      },
+      "outputIds": [
+        [
+          "TAVv_CW7NN"
+        ]
+      ],
+      "type": "WebhookReplyNode"
+    },
+    {
+      "config": {
+        "bodyTemplate": "{ \"result\" : {{working.result}} }",
+        "bodyTemplateType": "string",
+        "headerInfo": [
+        ],
+        "replyIdPath": "",
+        "responseCodeTemplate": ""
+      },
+      "id": "i6LdsstZa8",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "label": "Webhook Reply",
+        "name": "webhook-reply",
+        "x": 600,
+        "y": 700
+      },
+      "outputIds": [
+        [
+          "anqcphoFB_"
+        ]
+      ],
+      "type": "WebhookReplyNode"
+    },
+    {
+      "config": {
+        "currentItemPath": "working.currentItem",
+        "loopSourcePath": "data.body.numbers"
+      },
+      "id": "2i_Tiem5NA",
+      "meta": {
+        "category": "logic",
+        "description": "",
+        "groupStartX": 260,
+        "groupStartY": 200,
+        "label": "Loop",
+        "name": "loop",
+        "x": 600,
+        "y": 560
+      },
+      "outputIds": [
+        [
+          "i6LdsstZa8"
+        ],
+        [
+          "siJY5ElefU"
+        ]
+      ],
+      "type": "LoopNode"
+    },
+    {
+      "config": {
+        "loopNodeId": "2i_Tiem5NA",
+        "shouldBreak": false
+      },
+      "id": "XH70YOpJw6",
+      "meta": {
+        "category": "loop",
+        "description": "",
+        "groupId": "2i_Tiem5NA",
+        "label": "Next",
+        "name": "loop-next",
+        "x": 260,
+        "y": 400
+      },
+      "outputIds": [
+      ],
+      "type": "LoopCapNode"
+    },
+    {
+      "config": {
+        "statements": [
+          {
+            "expression": "{{working.result}}+{{working.currentItem.value}}",
+            "resultPath": "working.result"
+          }
+        ]
+      },
+      "id": "siJY5ElefU",
+      "meta": {
+        "category": "logic",
+        "description": "",
+        "groupId": "2i_Tiem5NA",
+        "label": "Math",
+        "name": "math",
+        "x": 240,
+        "y": 300
+      },
+      "outputIds": [
+        [
+          "XH70YOpJw6"
+        ]
+      ],
+      "type": "MathNode"
+    },
+    {
+      "config": {
+        "rules": [
+          {
+            "destination": "working.result",
+            "type": "set",
+            "valueTemplate": "0"
+          }
+        ]
+      },
+      "id": "Nekj79sJH5",
+      "meta": {
+        "category": "logic",
+        "description": "",
+        "label": "Mutate",
+        "name": "mutate",
+        "x": 600,
+        "y": 440
+      },
+      "outputIds": [
+        [
+          "2i_Tiem5NA"
+        ]
+      ],
+      "type": "MutateNode"
+    },
+    {
+      "config": {
+        "rules": [
+          {
+            "inputTemplate": "{{data.body.random}}",
+            "outputPath": "working.result",
+            "type": "indexOf"
+          }
+        ],
+        "sourceArrayPath": "data.body.numbers"
+      },
+      "id": "UXp4vJp6fe",
+      "meta": {
+        "category": "logic",
+        "description": "",
+        "label": "Array",
+        "name": "array",
+        "x": 800,
+        "y": 400
+      },
+      "outputIds": [
+        [
+          "foPIPkVnYe"
+        ]
+      ],
+      "type": "ArrayNode"
+    },
+    {
+      "config": {
+        "level": "verbose",
+        "message": "",
+        "property": ""
+      },
+      "id": "tZwHd8WJB4",
+      "meta": {
+        "category": "debug",
+        "description": "",
+        "label": "Debug",
+        "name": "debug",
+        "x": 1020,
+        "y": 620
+      },
+      "outputIds": [
+      ],
+      "type": "DebugNode"
+    },
+    {
+      "config": {
+        "bodyTemplate": "{ \"result\" : {{ jsonEncode working.result}} }",
+        "bodyTemplateType": "string",
+        "headerInfo": [
+        ],
+        "replyIdPath": "",
+        "responseCodeTemplate": ""
+      },
+      "id": "d6hQ7xVMYb",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "label": "Webhook Reply",
+        "name": "webhook-reply",
+        "x": 1020,
+        "y": 540
+      },
+      "outputIds": [
+        [
+          "tZwHd8WJB4"
+        ]
+      ],
+      "type": "WebhookReplyNode"
+    },
+    {
+      "config": {
+        "currentItemPath": "working.current",
+        "loopSourcePath": "data.body.numbers"
+      },
+      "id": "OCWOnIK7-f",
+      "meta": {
+        "category": "logic",
+        "description": "",
+        "groupStartX": 260,
+        "groupStartY": 200,
+        "label": "Loop",
+        "name": "loop",
+        "x": 1020,
+        "y": 440
+      },
+      "outputIds": [
+        [
+          "d6hQ7xVMYb"
+        ],
+        [
+          "_DXX6CDU1d"
+        ]
+      ],
+      "type": "LoopNode"
+    },
+    {
+      "config": {
+        "loopNodeId": "OCWOnIK7-f",
+        "shouldBreak": false
+      },
+      "id": "YAWlM5tfJ0",
+      "meta": {
+        "category": "loop",
+        "description": "",
+        "groupId": "OCWOnIK7-f",
+        "label": "Next",
+        "name": "loop-next",
+        "x": 280,
+        "y": 500
+      },
+      "outputIds": [
+      ],
+      "type": "LoopCapNode"
+    },
+    {
+      "config": {
+        "statements": [
+          {
+            "expression": "{{working.current.value}}+{{data.body.random}}",
+            "resultPath": "working.valuePlusRandom"
+          }
+        ]
+      },
+      "id": "_DXX6CDU1d",
+      "meta": {
+        "category": "logic",
+        "description": "",
+        "groupId": "OCWOnIK7-f",
+        "label": "Math",
+        "name": "math",
+        "x": 260,
+        "y": 280
+      },
+      "outputIds": [
+        [
+          "eNhWBClfz2"
+        ]
+      ],
+      "type": "MathNode"
+    },
+    {
+      "config": {
+        "destArrayPath": "working.result",
+        "rules": [
+          {
+            "inputTemplate": "{{working.valuePlusRandom}}",
+            "type": "push"
+          }
+        ],
+        "sourceArrayPath": "working.result"
+      },
+      "id": "eNhWBClfz2",
+      "meta": {
+        "category": "logic",
+        "description": "",
+        "groupId": "OCWOnIK7-f",
+        "label": "Array",
+        "name": "array",
+        "x": 260,
+        "y": 380
+      },
+      "outputIds": [
+        [
+          "YAWlM5tfJ0"
+        ]
+      ],
+      "type": "ArrayNode"
+    },
+    {
+      "config": {
+      },
+      "id": "ws9S2E3KvO",
+      "meta": {
+        "annotationText": "Placing 0 on the payload to start adding.",
+        "category": "annotation",
+        "height": 100,
+        "label": "Note",
+        "name": "note",
+        "width": 180,
+        "x": 400,
+        "y": 420
+      },
+      "outputIds": [
+      ],
+      "type": "AnnotationNode"
+    },
+    {
+      "config": {
+        "level": "verbose",
+        "message": "",
+        "property": ""
+      },
+      "id": "PI9tQVvTYG",
+      "meta": {
+        "category": "debug",
+        "description": "",
+        "label": "Debug",
+        "name": "debug",
+        "x": 1240,
+        "y": 660
+      },
+      "outputIds": [
+      ],
+      "type": "DebugNode"
+    },
+    {
+      "config": {
+        "bodyTemplate": "{ \"result\" : {{jsonEncode working.result}} }",
+        "bodyTemplateType": "string",
+        "headerInfo": [
+        ],
+        "isWebsocketMessage": false,
+        "replyIdPath": "",
+        "responseCodeTemplate": ""
+      },
+      "id": "cmOjRL7gJV",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "label": "Webhook Reply",
+        "name": "webhook-reply",
+        "x": 1240,
+        "y": 580
+      },
+      "outputIds": [
+        [
+          "PI9tQVvTYG"
+        ]
+      ],
+      "type": "WebhookReplyNode"
+    },
+    {
+      "config": {
+        "destArrayPath": "working.result",
+        "rules": [
+          {
+            "type": "flatten"
+          }
+        ],
+        "sourceArrayPath": "data.body.numbers"
+      },
+      "id": "43LqKZwPWo",
+      "meta": {
+        "category": "logic",
+        "description": "",
+        "label": "Array",
+        "name": "array",
+        "x": 1240,
+        "y": 420
+      },
+      "outputIds": [
+        [
+          "cmOjRL7gJV"
+        ]
+      ],
+      "type": "ArrayNode"
+    },
+    {
+      "config": {
+      },
+      "id": "XRuY1Ws9U7",
+      "meta": {
+        "annotationText": "Keep in mind, because the output is a number, we do not need to format with `jsonEncode`",
+        "category": "annotation",
+        "height": 160,
+        "label": "Note",
+        "name": "note",
+        "width": 180,
+        "x": 400,
+        "y": 680
+      },
+      "outputIds": [
+      ],
+      "type": "AnnotationNode"
+    },
+    {
+      "config": {
+      },
+      "id": "X8-AHt_iaT",
+      "meta": {
+        "annotationText": "The Switch Node determines which test to run depending on the value of {{data.body.id}}",
+        "category": "annotation",
+        "height": 100,
+        "label": "Note",
+        "name": "note",
+        "width": 260,
+        "x": 700,
+        "y": 140
+      },
+      "outputIds": [
+      ],
+      "type": "AnnotationNode"
+    },
+    {
+      "config": {
+        "level": "verbose",
+        "message": "",
+        "property": ""
+      },
+      "id": "I0Y6kIl0Fh",
+      "meta": {
+        "category": "debug",
+        "description": "",
+        "label": "Debug",
+        "name": "debug",
+        "x": 1440,
+        "y": 660
+      },
+      "outputIds": [
+      ],
+      "type": "DebugNode"
+    },
+    {
+      "config": {
+        "bodyTemplate": "{ \"result\" : {{jsonEncode working.result}} }",
+        "bodyTemplateType": "string",
+        "headerInfo": [
+        ],
+        "isWebsocketMessage": false,
+        "replyIdPath": "",
+        "responseCodeTemplate": ""
+      },
+      "id": "0qqZapMTiP",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "label": "Webhook Reply",
+        "name": "webhook-reply",
+        "x": 1440,
+        "y": 580
+      },
+      "outputIds": [
+        [
+          "I0Y6kIl0Fh"
+        ]
+      ],
+      "type": "WebhookReplyNode"
+    },
+    {
+      "config": {
+        "rules": [
+          {
+            "inputTemplate": "class",
+            "outputPath": "working.result",
+            "type": "groupBy"
+          }
+        ],
+        "sourceArrayPath": "data.body.devices"
+      },
+      "id": "XgZIDeOwSG",
+      "meta": {
+        "category": "logic",
+        "description": "",
+        "label": "Array",
+        "name": "array",
+        "x": 1440,
+        "y": 420
+      },
+      "outputIds": [
+        [
+          "0qqZapMTiP"
+        ]
+      ],
+      "type": "ArrayNode"
+    }
+  ],
+  "triggers": [
+    {
+      "config": {
+      },
+      "key": "66b3c27b9cf1fc23c435e175",
+      "meta": {
+        "category": "trigger",
+        "description": "",
+        "label": "Array",
+        "name": "webhook",
+        "uiId": "5dB_0De4Qq",
+        "x": 980,
+        "y": 80
+      },
+      "outputIds": [
+        [
+          "o6xwEimMA-"
+        ]
+      ],
+      "type": "webhook"
+    }
+  ]
+}

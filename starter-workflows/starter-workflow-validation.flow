@@ -1,0 +1,182 @@
+{
+  "_exportDate": "2019-08-15T20:01:52.266Z",
+  "_type": "flow",
+  "applicationId": "5c40ecbac853d20008cd96ba",
+  "customNodeVersions": [
+  ],
+  "customNodes": [
+  ],
+  "description": "",
+  "enabled": true,
+  "flowClass": "cloud",
+  "globals": [
+  ],
+  "id": "5d24ee2c22be2b0009a8e2a0",
+  "name": "Starter Workflow: Validation",
+  "nodes": [
+    {
+      "config": {
+        "cases": [
+          {
+            "caseLabel": "",
+            "caseTemplate": "required-fields",
+            "dontBreak": false
+          }
+        ],
+        "switchTemplate": "{{ data.query.id }}"
+      },
+      "id": "ZHVEK9XmQw",
+      "meta": {
+        "category": "logic",
+        "description": "",
+        "id": "gZuPKpPt0k",
+        "label": "Validation",
+        "name": "switch",
+        "x": 180,
+        "y": 240
+      },
+      "outputIds": [
+        [
+          "1tq5FnuBct"
+        ],
+        [
+          "ergP2QhweS",
+          "9sca6fBLD2"
+        ]
+      ],
+      "type": "SwitchNode"
+    },
+    {
+      "config": {
+        "message": "",
+        "property": ""
+      },
+      "id": "1tq5FnuBct",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "id": "CwvDon2R3w",
+        "label": "Debug",
+        "name": "debug",
+        "x": 320,
+        "y": 420
+      },
+      "outputIds": [
+      ],
+      "type": "DebugNode"
+    },
+    {
+      "config": {
+        "bodyTemplate": "{ \"result\" : \"success\" }",
+        "bodyTemplateType": "string",
+        "headerInfo": [
+        ],
+        "replyIdPath": "",
+        "responseCodeTemplate": "200"
+      },
+      "id": "9sca6fBLD2",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "id": "tvktYfBZRp",
+        "label": "Webhook Reply",
+        "name": "webhook-reply",
+        "x": 220,
+        "y": 640
+      },
+      "outputIds": [
+        [
+          "e8SE_vmvr8"
+        ]
+      ],
+      "type": "WebhookReplyNode"
+    },
+    {
+      "config": {
+        "message": "",
+        "property": ""
+      },
+      "id": "n1yh4PxYzV",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "id": "CwvDon2R3w",
+        "label": "Debug",
+        "name": "debug",
+        "x": 20,
+        "y": 740
+      },
+      "outputIds": [
+      ],
+      "type": "DebugNode"
+    },
+    {
+      "config": {
+        "bodyTemplate": "{ \"error\" : \"One or more user fields are missing.\" }",
+        "bodyTemplateType": "string",
+        "headerInfo": [
+        ],
+        "replyIdPath": "",
+        "responseCodeTemplate": "400"
+      },
+      "id": "ergP2QhweS",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "id": "tvktYfBZRp",
+        "label": "Webhook Reply",
+        "name": "webhook-reply",
+        "x": 20,
+        "y": 640
+      },
+      "outputIds": [
+        [
+          "n1yh4PxYzV"
+        ]
+      ],
+      "type": "WebhookReplyNode"
+    },
+    {
+      "config": {
+        "message": "",
+        "property": ""
+      },
+      "id": "e8SE_vmvr8",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "id": "CwvDon2R3w",
+        "label": "Debug",
+        "name": "debug",
+        "x": 220,
+        "y": 740
+      },
+      "outputIds": [
+      ],
+      "type": "DebugNode"
+    }
+  ],
+  "triggers": [
+    {
+      "config": {
+      },
+      "key": "5c40ed4b52fd670008045edb",
+      "meta": {
+        "category": "trigger",
+        "description": "",
+        "id": "V~j7MvcjUN",
+        "label": "Validation",
+        "name": "webhook",
+        "uiId": "P7E0SInUhf",
+        "x": 180,
+        "y": 80
+      },
+      "outputIds": [
+        [
+          "ZHVEK9XmQw"
+        ]
+      ],
+      "type": "webhook"
+    }
+  ]
+}
