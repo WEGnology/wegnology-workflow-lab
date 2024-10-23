@@ -1,0 +1,430 @@
+{
+  "_exportDate": "2024-10-23T11:07:43.071Z",
+  "_type": "flow",
+  "applicationId": "668695f6cae88b2845ce8de7",
+  "customNodeVersions": [
+  ],
+  "customNodes": [
+  ],
+  "description": "This workflow is triggered when a webhook is hit to provide device data to WEGnology from Azure IoT Hub. ",
+  "enabled": false,
+  "flowClass": "cloud",
+  "globals": [
+  ],
+  "id": "6717b841d56f6d48b5f97e6d",
+  "name": "Webhook Trigger Workflow - Azure to WEGnology",
+  "nodes": [
+    {
+      "config": {
+        "level": "verbose",
+        "message": "",
+        "property": ""
+      },
+      "id": "96Iu-B2o8Z",
+      "meta": {
+        "category": "debug",
+        "description": "",
+        "label": "Debug",
+        "name": "debug",
+        "x": 800,
+        "y": 320
+      },
+      "outputIds": [
+      ],
+      "type": "DebugNode"
+    },
+    {
+      "config": {
+        "bodyTemplate": "{\n  \"validationResponse\": \"{{data.body.[0].data.validationCode}}\"\n}",
+        "bodyTemplateType": "string",
+        "headerInfo": [
+          {
+            "keyTemplate": "Content-Type",
+            "valueTemplate": "application/json"
+          }
+        ],
+        "isWebsocketMessage": false,
+        "replyIdPath": "",
+        "responseCodeTemplate": "200"
+      },
+      "id": "6Tu9pSsp8y",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "label": "Validate",
+        "name": "webhook-reply",
+        "x": 800,
+        "y": 240
+      },
+      "outputIds": [
+        [
+          "96Iu-B2o8Z"
+        ]
+      ],
+      "type": "WebhookReplyNode"
+    },
+    {
+      "config": {
+        "cases": [
+          {
+            "caseLabel": "Device Telemetry Data",
+            "caseTemplate": "Microsoft.Devices.DeviceTelemetry"
+          },
+          {
+            "caseLabel": "New Device Created",
+            "caseTemplate": "Microsoft.Devices.DeviceCreated"
+          },
+          {
+            "caseLabel": "Device Deleted",
+            "caseTemplate": "Microsoft.Devices.DeviceDeleted"
+          },
+          {
+            "caseLabel": "Device Connected",
+            "caseTemplate": "Microsoft.Devices.DeviceConnected"
+          },
+          {
+            "caseLabel": "Device Disconnected",
+            "caseTemplate": "Microsoft.Devices.DeviceDisconnected"
+          }
+        ],
+        "switchTemplate": "{{data.body.[0].eventType}}"
+      },
+      "id": "F-OgzAbvwV",
+      "meta": {
+        "category": "logic",
+        "description": "",
+        "label": "Event Type",
+        "name": "switch",
+        "x": 640,
+        "y": 420
+      },
+      "outputIds": [
+        [
+          "RNVyw4AjTt"
+        ],
+        [
+          "2eC3fvv6Xu"
+        ],
+        [
+          "Ma8s560_IO"
+        ],
+        [
+          "WE6qHlDKa8"
+        ],
+        [
+          "h36u4--jPe"
+        ],
+        [
+          "OZ_poL4d9k"
+        ]
+      ],
+      "type": "SwitchNode"
+    },
+    {
+      "config": {
+        "level": "verbose",
+        "message": "",
+        "property": ""
+      },
+      "id": "hIiyp4d0sz",
+      "meta": {
+        "category": "debug",
+        "description": "",
+        "label": "Debug",
+        "name": "debug",
+        "x": 240,
+        "y": 800
+      },
+      "outputIds": [
+      ],
+      "type": "DebugNode"
+    },
+    {
+      "config": {
+        "expression": "{{data.body.[0].eventType}} === 'Microsoft.EventGrid.SubscriptionValidationEvent'"
+      },
+      "id": "tUxsKyxWCo",
+      "meta": {
+        "category": "logic",
+        "description": "",
+        "label": "Validate?",
+        "name": "conditional",
+        "x": 660,
+        "y": 140
+      },
+      "outputIds": [
+        [
+          "F-OgzAbvwV",
+          "bXh6JEj2jD"
+        ],
+        [
+          "6Tu9pSsp8y"
+        ]
+      ],
+      "type": "ConditionalNode"
+    },
+    {
+      "config": {
+        "rules": [
+          {
+            "destination": "working.data",
+            "type": "set",
+            "valueTemplate": "{{{decodeBase64 data.body.[0].data.body}}}",
+            "valueTemplateType": "json"
+          }
+        ]
+      },
+      "id": "2eC3fvv6Xu",
+      "meta": {
+        "category": "logic",
+        "description": "",
+        "label": "Mutate",
+        "name": "mutate",
+        "x": 240,
+        "y": 640
+      },
+      "outputIds": [
+        [
+          "3f0Z8AZCdj"
+        ]
+      ],
+      "type": "MutateNode"
+    },
+    {
+      "config": {
+        "attrDataMethod": "individualFields",
+        "attrInfos": [
+          {
+            "key": "humidity",
+            "valueTemplate": "{{working.data.humidity}}"
+          },
+          {
+            "key": "temperature",
+            "valueTemplate": "{{working.data.temperature}}"
+          }
+        ],
+        "deviceId": "5fa068af65465400076fbfba",
+        "deviceIdTemplateType": "stringTemplate",
+        "resultPath": "",
+        "timeSourceType": "payloadTime"
+      },
+      "id": "3f0Z8AZCdj",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "label": "Device: State",
+        "name": "device-state",
+        "x": 240,
+        "y": 720
+      },
+      "outputIds": [
+        [
+          "hIiyp4d0sz"
+        ]
+      ],
+      "type": "DeviceChangeStateNode"
+    },
+    {
+      "config": {
+        "level": "verbose",
+        "message": "",
+        "property": ""
+      },
+      "id": "Ma8s560_IO",
+      "meta": {
+        "category": "debug",
+        "description": "",
+        "label": "Debug",
+        "name": "debug",
+        "x": 440,
+        "y": 580
+      },
+      "outputIds": [
+      ],
+      "type": "DebugNode"
+    },
+    {
+      "config": {
+        "level": "verbose",
+        "message": "",
+        "property": ""
+      },
+      "id": "WE6qHlDKa8",
+      "meta": {
+        "category": "debug",
+        "description": "",
+        "label": "Debug",
+        "name": "debug",
+        "x": 540,
+        "y": 680
+      },
+      "outputIds": [
+      ],
+      "type": "DebugNode"
+    },
+    {
+      "config": {
+        "level": "verbose",
+        "message": "",
+        "property": ""
+      },
+      "id": "h36u4--jPe",
+      "meta": {
+        "category": "debug",
+        "description": "",
+        "label": "Debug",
+        "name": "debug",
+        "x": 700,
+        "y": 580
+      },
+      "outputIds": [
+      ],
+      "type": "DebugNode"
+    },
+    {
+      "config": {
+        "level": "verbose",
+        "message": "",
+        "property": ""
+      },
+      "id": "OZ_poL4d9k",
+      "meta": {
+        "category": "debug",
+        "description": "",
+        "label": "Debug",
+        "name": "debug",
+        "x": 820,
+        "y": 680
+      },
+      "outputIds": [
+      ],
+      "type": "DebugNode"
+    },
+    {
+      "config": {
+        "level": "verbose",
+        "message": "",
+        "property": ""
+      },
+      "id": "RNVyw4AjTt",
+      "meta": {
+        "category": "debug",
+        "description": "",
+        "label": "Debug",
+        "name": "debug",
+        "x": 960,
+        "y": 580
+      },
+      "outputIds": [
+      ],
+      "type": "DebugNode"
+    },
+    {
+      "config": {
+        "bodyTemplate": "",
+        "bodyTemplateType": "string",
+        "cookieInfo": [
+        ],
+        "experienceVersion": "develop",
+        "headerInfo": [
+        ],
+        "mqttTopicsTemplate": [
+        ],
+        "replyIdPath": "",
+        "replyType": "custom",
+        "responseCodeTemplate": "200",
+        "sameSiteTemplate": ""
+      },
+      "id": "bXh6JEj2jD",
+      "meta": {
+        "category": "output",
+        "description": "",
+        "label": "Endpoint: Reply",
+        "mqttTopicsType": [
+        ],
+        "name": "endpoint-reply",
+        "x": 520,
+        "y": 240
+      },
+      "outputIds": [
+      ],
+      "type": "EndpointReplyNode"
+    },
+    {
+      "config": {
+      },
+      "id": "YNy8UZ8Kjh",
+      "meta": {
+        "annotationText": "If this is a validation request, echo back the validation code.",
+        "category": "annotation",
+        "height": 140,
+        "label": "Note",
+        "name": "note",
+        "width": 260,
+        "x": 1000,
+        "y": 240
+      },
+      "outputIds": [
+      ],
+      "type": "AnnotationNode"
+    },
+    {
+      "config": {
+      },
+      "id": "LpcHzgkLO8",
+      "meta": {
+        "annotationText": "Reply with a 200 (OK) to let Azure know the request was received.",
+        "category": "annotation",
+        "height": 140,
+        "label": "Note",
+        "name": "note",
+        "width": 260,
+        "x": 240,
+        "y": 240
+      },
+      "outputIds": [
+      ],
+      "type": "AnnotationNode"
+    },
+    {
+      "config": {
+      },
+      "id": "c38WfpAI_n",
+      "meta": {
+        "annotationText": "Telemetry data is received Base64 encoded. Decode the data and report the values as [Device State](https://docs.app.wnology.io/devices/state/).",
+        "category": "annotation",
+        "height": 140,
+        "label": "Note",
+        "name": "note",
+        "width": 200,
+        "x": 20,
+        "y": 640
+      },
+      "outputIds": [
+      ],
+      "type": "AnnotationNode"
+    }
+  ],
+  "triggers": [
+    {
+      "config": {
+      },
+      "key": "5fa01c13106a3a0007460891",
+      "meta": {
+        "category": "trigger",
+        "description": "",
+        "label": "Webhook",
+        "name": "webhook",
+        "uiId": "EBCT0Yjjma",
+        "x": 660,
+        "y": 20
+      },
+      "outputIds": [
+        [
+          "tUxsKyxWCo"
+        ]
+      ],
+      "type": "webhook"
+    }
+  ]
+}
